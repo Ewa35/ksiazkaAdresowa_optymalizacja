@@ -17,10 +17,10 @@ struct Adresat {
     int numerPorzadkowy, numerPorzadkowyUzytkownika;
 
 };
-void WyborOpcji ( vector<Adresat> &adresaci, int iloscAdresatow, int numerPorzadkowyUzytkownika);
+void WyborOpcji ( vector<Adresat> &adresaci, int &iloscAdresatow, int &numerPorzadkowyUzytkownika, vector<Uzytkownik> &uzytkownicy);
 int main();
 
-int WczytajDaneZPliku ( vector<Adresat> &adresaci, int iloscAdresatow, int numerUzytkownikaNaLiscie) {
+int WczytajDaneZPliku ( vector<Adresat> &adresaci, int &iloscAdresatow, int &numerUzytkownikaNaLiscie) {
 
     adresaci.clear();
     string imieAdresata, nazwiskoAdresata, numerTelefonu, adresEmail, adresZamieszkania, numerPorzadkowy, numerPorzadkowyUzytkownika;
@@ -116,7 +116,7 @@ void UsuwanieIZapisywanieDoPliku(  vector<Adresat>&adresaci, vector <Adresat> ::
     rename("KsiazkaAdresowa_plikTymczasowy.txt", "KsiazkaAdresowa.txt");
 }
 
-void NowaOsoba ( vector<Adresat> &adresaci, int iloscAdresatow, int numerPorzadkowyUzytkownika) {
+void NowaOsoba ( vector<Adresat> &adresaci, int &iloscAdresatow, int &numerPorzadkowyUzytkownika, vector<Uzytkownik> &uzytkownicy) {
 
     system ("cls");
     vector<Adresat> :: reverse_iterator itr;
@@ -159,9 +159,9 @@ void NowaOsoba ( vector<Adresat> &adresaci, int iloscAdresatow, int numerPorzadk
     plik.close();
     cout<<"Zapisano!"<<endl;
     Sleep(2000);
-    WyborOpcji(adresaci, iloscAdresatow, numerPorzadkowyUzytkownika);
+    WyborOpcji(adresaci, iloscAdresatow, numerPorzadkowyUzytkownika, uzytkownicy);
 }
-void WyszukajPoImieniu (vector<Adresat> &adresaci, int iloscAdresatow, int numerPorzadkowyUzytkownika) {
+void WyszukajPoImieniu (vector<Adresat> &adresaci, int &iloscAdresatow, int &numerPorzadkowyUzytkownika,  vector<Uzytkownik> &uzytkownicy) {
     system("cls");
     string imieSzukanegoAdresata;
     cout<<"Podaj imie szukanego adresata:"<<endl;
@@ -178,9 +178,9 @@ void WyszukajPoImieniu (vector<Adresat> &adresaci, int iloscAdresatow, int numer
         cout<<"Nie znaleziono adresata"<<endl;
     }
     system("pause");
-    WyborOpcji(adresaci, iloscAdresatow, numerPorzadkowyUzytkownika);
+    WyborOpcji(adresaci, iloscAdresatow, numerPorzadkowyUzytkownika, uzytkownicy);
 }
-void WyszukajPoNazwisku (vector<Adresat> &adresaci, int iloscAdresatow,  int numerPorzadkowyUzytkownika) {
+void WyszukajPoNazwisku (vector<Adresat> &adresaci, int &iloscAdresatow,  int &numerPorzadkowyUzytkownika,  vector<Uzytkownik> &uzytkownicy) {
     system("cls");
     string nazwiskoSzukanegoAdresata;
     cout<<"Podaj nazwisko szukanego adresata:"<<endl;
@@ -197,9 +197,9 @@ void WyszukajPoNazwisku (vector<Adresat> &adresaci, int iloscAdresatow,  int num
         cout<<"Nie znaleziono adresata"<<endl;
     }
     system("pause");
-    WyborOpcji(adresaci, iloscAdresatow, numerPorzadkowyUzytkownika);
+    WyborOpcji(adresaci, iloscAdresatow, numerPorzadkowyUzytkownika, uzytkownicy);
 }
-void WyswietlListeAdresatow(vector<Adresat> &adresaci,int iloscAdresatow,  int numerPorzadkowyUzytkownika) {
+void WyswietlListeAdresatow(vector<Adresat> &adresaci,int &iloscAdresatow,  int &numerPorzadkowyUzytkownika,  vector<Uzytkownik> &uzytkownicy) {
     system("cls");
     int iloscAdresatowWektorze=0;
     for (vector <Adresat> :: iterator itr =adresaci.begin(), koniec=adresaci.end(); itr!=koniec; ++itr) {
@@ -213,9 +213,9 @@ void WyswietlListeAdresatow(vector<Adresat> &adresaci,int iloscAdresatow,  int n
         cout<<"Brak zapisanych adresatow"<<endl;
     }
     system("pause");
-    WyborOpcji(adresaci, iloscAdresatow, numerPorzadkowyUzytkownika);
+    WyborOpcji(adresaci, iloscAdresatow, numerPorzadkowyUzytkownika, uzytkownicy);
 }
-void UsuwanieAdresata (vector<Adresat> &adresaci, int iloscAdresatow,  int numerPorzadkowyUzytkownika) {
+void UsuwanieAdresata (vector<Adresat> &adresaci, int &iloscAdresatow,  int &numerPorzadkowyUzytkownika,  vector<Uzytkownik> &uzytkownicy) {
     system("cls");
     int numerPorzadkowyAdresataDoUsuniecia;
     string linia, tekstDoUsuniecia;
@@ -250,7 +250,7 @@ void UsuwanieAdresata (vector<Adresat> &adresaci, int iloscAdresatow,  int numer
         cout<<"Nie znaleziono adresata"<<endl;
         system("pause");
     }
-    WyborOpcji(adresaci, iloscAdresatow, numerPorzadkowyUzytkownika);
+    WyborOpcji(adresaci, iloscAdresatow, numerPorzadkowyUzytkownika, uzytkownicy);
 }
 void WczytajEdycjeDanychDoPliku (vector<Adresat> &adresaci, vector <Adresat> :: iterator &itr) {
     string linijka;
@@ -292,7 +292,7 @@ void WczytajEdycjeDanychDoPliku (vector<Adresat> &adresaci, vector <Adresat> :: 
     rename("KsiazkaAdresowa_plikTymczasowy.txt", "KsiazkaAdresowa.txt");
 }
 
-int ZmianaDanychAdresata(vector<Adresat> &adresaci, vector <Adresat> :: iterator &itr, int iloscAdresatow, int numerPorzadkowyUzytkownika) {
+int ZmianaDanychAdresata(vector<Adresat> &adresaci, vector <Adresat> :: iterator &itr, int &iloscAdresatow, int &numerPorzadkowyUzytkownika,  vector<Uzytkownik> &uzytkownicy) {
 
     char wybor;
     string noweDane;
@@ -349,12 +349,12 @@ int ZmianaDanychAdresata(vector<Adresat> &adresaci, vector <Adresat> :: iterator
             system("pause");
             break;
         case '6':
-            WyborOpcji(adresaci, iloscAdresatow, numerPorzadkowyUzytkownika);
+            WyborOpcji(adresaci, iloscAdresatow, numerPorzadkowyUzytkownika, uzytkownicy);
             break;
         }
     } while (wybor!='6');
 }
-void EdytujDane(vector<Adresat> &adresaci,int iloscAdresatow, int numerPorzadkowyUzytkownika) {
+void EdytujDane(vector<Adresat> &adresaci,int &iloscAdresatow, int &numerPorzadkowyUzytkownika,  vector<Uzytkownik> &uzytkownicy) {
     system("cls");
     string nazwisko;
     char wybor;
@@ -373,7 +373,7 @@ void EdytujDane(vector<Adresat> &adresaci,int iloscAdresatow, int numerPorzadkow
             cin>>wybor;
 
             if (wybor=='1') {
-                ZmianaDanychAdresata(adresaci,itr,iloscAdresatow, numerPorzadkowyUzytkownika);
+                ZmianaDanychAdresata(adresaci,itr,iloscAdresatow, numerPorzadkowyUzytkownika, uzytkownicy);
 
             } else if (wybor=='2') {
 
@@ -385,10 +385,53 @@ void EdytujDane(vector<Adresat> &adresaci,int iloscAdresatow, int numerPorzadkow
         cout<<"Nie znaleziono adresatow o podanym nazwisku"<<endl;
         system("pause");
     }
-    WyborOpcji(adresaci, iloscAdresatow, numerPorzadkowyUzytkownika);
+    WyborOpcji(adresaci, iloscAdresatow, numerPorzadkowyUzytkownika, uzytkownicy);
 }
+void ZmienHaslo (vector<Adresat>&adresaci, int &iloscAdresatow, int &numerPorzadkowyUzytkownika,vector<Uzytkownik> &uzytkownicy) {
+    string stareHaslo, noweHaslo;
+    int iloscZnalezionychHasel=0;
 
-void WyborOpcji(vector<Adresat>&adresaci, int iloscAdresatow, int numerPorzadkowyUzytkownika) {
+    for (int i=0; i<3; i++) {
+        system("cls");
+         cout<<"Podaj stare haslo"<<endl;
+        cin>>stareHaslo;
+        for (vector <Uzytkownik> :: iterator itr =uzytkownicy.begin(), koniec=uzytkownicy.end(); itr!=koniec; itr++) {
+            if (stareHaslo==itr->hasloUzytkownika && numerPorzadkowyUzytkownika==itr->numerPorzadkowyUzytkownika) {
+                cout<<"Podaj nowe haslo: "<<endl;
+                cin>>noweHaslo;
+                itr->hasloUzytkownika=noweHaslo;
+                iloscZnalezionychHasel++;
+                fstream plik;
+                plik.open("listaUzytkownikow.txt", ios::out | ios::trunc);
+                plik.close();
+                for (vector <Uzytkownik> :: iterator itr =uzytkownicy.begin(), koniec=uzytkownicy.end(); itr!=koniec; itr++) {
+
+                    plik.open("listaUzytkownikow.txt", ios::out | ios::app);
+                    if (plik.good()) {
+                        plik << itr->numerPorzadkowyUzytkownika <<"|";
+                        plik << itr->loginUzytkownika<<"|" ;
+                        plik << itr->hasloUzytkownika<<"|"<<endl;
+
+                    }
+                    plik.close();
+                }
+                cout<<"Haslo zostalo zmienione"<<endl;
+
+                Sleep(1500);
+            }
+        }
+            if (iloscZnalezionychHasel!=0) i=3;
+
+            else if (iloscZnalezionychHasel==0) {
+                    cout<<"Bledne haslo sprobuj jeszcze raz. Pozostalo ci "<<3-i<<" prob"<<endl;
+                    Sleep(1500);
+            }
+    }
+
+    WyborOpcji(adresaci, iloscAdresatow, numerPorzadkowyUzytkownika, uzytkownicy);
+
+}
+void WyborOpcji(vector<Adresat>&adresaci, int &iloscAdresatow, int &numerPorzadkowyUzytkownika,vector<Uzytkownik> &uzytkownicy ) {
     system("cls");
     char wybor;
     while (true) {
@@ -401,31 +444,35 @@ void WyborOpcji(vector<Adresat>&adresaci, int iloscAdresatow, int numerPorzadkow
         cout<<"4. Wyswietl wszytskich adresatow"<<endl;
         cout<<"5. Usun adresata"<<endl;
         cout<<"6. Edytuj adresata"<<endl;
+        cout<<"7. Zmien halo"<<endl;
         cout<<"9. Wyloguj"<<endl;
         cout<<endl;
         cout<<"Wybierz opcje:"<<endl;
         cin>>wybor;
         switch(wybor) {
         case '1':
-            NowaOsoba(adresaci, iloscAdresatow, numerPorzadkowyUzytkownika);
+            NowaOsoba(adresaci, iloscAdresatow, numerPorzadkowyUzytkownika, uzytkownicy);
             break;
         case '2':
-            WyszukajPoImieniu(adresaci, iloscAdresatow, numerPorzadkowyUzytkownika);
+            WyszukajPoImieniu(adresaci, iloscAdresatow, numerPorzadkowyUzytkownika, uzytkownicy);
 
             break;
         case '3':
-            WyszukajPoNazwisku(adresaci, iloscAdresatow, numerPorzadkowyUzytkownika);
+            WyszukajPoNazwisku(adresaci, iloscAdresatow, numerPorzadkowyUzytkownika, uzytkownicy);
             break;
 
         case '4':
-            WyswietlListeAdresatow(adresaci, iloscAdresatow, numerPorzadkowyUzytkownika);
+            WyswietlListeAdresatow(adresaci, iloscAdresatow, numerPorzadkowyUzytkownika, uzytkownicy);
             break;
 
         case '5':
-            UsuwanieAdresata(adresaci, iloscAdresatow, numerPorzadkowyUzytkownika);
+            UsuwanieAdresata(adresaci, iloscAdresatow, numerPorzadkowyUzytkownika, uzytkownicy);
             break;
         case '6':
-            EdytujDane(adresaci, iloscAdresatow, numerPorzadkowyUzytkownika);
+            EdytujDane(adresaci, iloscAdresatow, numerPorzadkowyUzytkownika, uzytkownicy);
+            break;
+        case '7':
+            ZmienHaslo(adresaci, iloscAdresatow, numerPorzadkowyUzytkownika, uzytkownicy);
             break;
         case '9':
             main();
@@ -462,10 +509,10 @@ void WczytajUzytkownikow (vector<Uzytkownik> &uzytkownicy) {
     }
 }
 
-void RejestracjaNowegoUzytkownika(vector<Uzytkownik>& uzytkownicy, vector<Adresat> &adresaci, int iloscAdresatow) {
+int RejestracjaNowegoUzytkownika(vector<Uzytkownik>& uzytkownicy, vector<Adresat> &adresaci, int &iloscAdresatow,int &numerPorzadkowyUzytkownika) {
     system("cls");
     string loginUzytkownika, hasloUzytkownika;
-    int numerPorzadkowyUzytkownika;
+
     vector<Uzytkownik> :: reverse_iterator it;
     Uzytkownik nowy;
     if (uzytkownicy.empty()) {
@@ -496,13 +543,13 @@ void RejestracjaNowegoUzytkownika(vector<Uzytkownik>& uzytkownicy, vector<Adresa
     Sleep(2000);
     iloscAdresatow=0;
     iloscAdresatow=WczytajDaneZPliku(adresaci, iloscAdresatow, numerPorzadkowyUzytkownika);
-    WyborOpcji(adresaci, iloscAdresatow, numerPorzadkowyUzytkownika);
-
+    WyborOpcji(adresaci, iloscAdresatow, numerPorzadkowyUzytkownika, uzytkownicy);
+    return numerPorzadkowyUzytkownika;
 }
 
-void LogowanieUzytkownika(vector<Uzytkownik>& uzytkownicy, vector<Adresat> &adresaci, int iloscAdresatow) {
+int LogowanieUzytkownika(vector<Uzytkownik>& uzytkownicy, vector<Adresat> &adresaci, int &iloscAdresatow, int &numerPorzadkowyUzytkownika) {
     string loginUzytkownika, hasloUzytkownika;
-    int numerPorzadkowyUzytkownika, iloscZnalezionychUzytkownikow=0;
+    int  iloscZnalezionychUzytkownikow=0;
     for(int i=3; i>0; i--) {
         system("cls");
         cout<<"Podaj login "<<endl;
@@ -518,7 +565,7 @@ void LogowanieUzytkownika(vector<Uzytkownik>& uzytkownicy, vector<Adresat> &adre
                 i=0;
                 iloscAdresatow=0;
                 iloscAdresatow=WczytajDaneZPliku(adresaci, iloscAdresatow, numerPorzadkowyUzytkownika);
-                WyborOpcji(adresaci, iloscAdresatow, numerPorzadkowyUzytkownika);
+                WyborOpcji(adresaci, iloscAdresatow, numerPorzadkowyUzytkownika, uzytkownicy);
             }
         }
         if (iloscZnalezionychUzytkownikow==0) {
@@ -526,7 +573,7 @@ void LogowanieUzytkownika(vector<Uzytkownik>& uzytkownicy, vector<Adresat> &adre
             Sleep(1500);
         }
     }
-
+    return numerPorzadkowyUzytkownika;
 }
 
 int main() {
@@ -534,7 +581,7 @@ int main() {
     vector<Uzytkownik> uzytkownicy;
     char wybor;
     WczytajUzytkownikow(uzytkownicy);
-    int iloscAdresatow=0;
+    int iloscAdresatow=0, numerPorzadkowyUzytkownika=0;
     while (true) {
         system("cls");
         cout<<"1. Rejestracja"<<endl;
@@ -546,15 +593,16 @@ int main() {
 
         switch (wybor) {
         case '1':
-            RejestracjaNowegoUzytkownika(uzytkownicy, adresaci, iloscAdresatow);
+            numerPorzadkowyUzytkownika=RejestracjaNowegoUzytkownika(uzytkownicy, adresaci, iloscAdresatow, numerPorzadkowyUzytkownika);
             break;
         case '2':
-            LogowanieUzytkownika(uzytkownicy, adresaci, iloscAdresatow);
+            numerPorzadkowyUzytkownika=LogowanieUzytkownika(uzytkownicy, adresaci, iloscAdresatow, numerPorzadkowyUzytkownika);
             break;
         case '3':
             exit(0);
             break;
         }
+        //WyborOpcji(adresaci, iloscAdresatow, numerPorzadkowyUzytkownika, uzytkownicy);
     }
     return 0;
 }
